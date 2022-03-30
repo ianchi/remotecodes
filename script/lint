@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/.."
+set -euxo pipefail
+
+isort remotecodes #tests
+pyupgrade --py38-plus remotecodes/*.py remotecodes/**/*.py
+black --safe remotecodes #tests
+pylint remotecodes
+flake8 remotecodes
+mypy remotecodes
+
+python -m remotecodes validate remotecodes/codes

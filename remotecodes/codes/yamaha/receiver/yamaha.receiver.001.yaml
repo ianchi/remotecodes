@@ -1,0 +1,130 @@
+info:
+  brand: Yamaha
+  category: receiver
+  models:
+    - RX-V685
+    - RX-A780
+    - RX-A3080
+    - CX-A5200
+
+  notes: >
+    Not all modes are supported by all models
+
+media_player:
+  #device_class: speaker
+
+  power:
+    power_on: nec:0xFE:0x7E
+    power_off: nec:0x7E:0x7F
+    #power_toggle:
+
+  volume:
+    #up:
+    #down:
+    mute_on: nec:0x7E:0xA2
+    mute_off: nec:0x7E:0xA3
+    #mute_toggle:
+
+    #volume_set: #range 0-1
+
+  sources:
+    HDMI1: nec:0x7A:0x4738
+    HDMI2: nec:0x7A:0x4A35
+    HDMI3: nec:0x7A:0x4D32
+    HDMI4: nec:0x7A:0x502F
+    HDMI5: nec:0x7A:0x700F
+    HDMI6: nec:0x7A:0x730C
+    HDMI7: nec:0x7A:0x98E7
+    AV1: nec:0x7A:0X532C
+    AV2: nec:0x7A:0X5629
+    AV3: nec:0x7A:0X5926
+    AV4: nec:0x7A:0X5C23
+    AV5: nec:0x7A:0X5F20
+    AV6: nec:0x7A:0X621D
+    AV7: nec:0x7A:0X7609
+    AUDIO1: nec:0x7A:0x651A
+    AUDIO2: nec:0x7A:0x6817
+    AUDIO3: nec:0x7A:0x7C03
+    AUDIO4: nec:0x7A:0x7F00
+    AUDIO5: nec:0x7A:0xACD3
+    AUX: nec:0x7A:0x55
+    PHONO: nec:0x7A:0x14
+
+  sound_modes:
+    HallInMunichA: nec:0x7E:0xE1
+    HallInMunichB: nec:0x7E:0xE2
+    HallInFrankfurt: nec:0x7E:0xE3
+    HallInStuttgart: nec:0x7E:0xE4
+    HallInVienna: nec:0x7E:0xE5
+    HallInAmsterdam: nec:0x7E:0xE6
+    HallInUsaA: nec:0x7E:0xC4
+    HallInUsaB: nec:0x7E:0xC5
+    ChurchInTokyo: nec:0x7E:0xE7
+    ChurchInFreiburg: nec:0x7E:0xE8
+    ChurchInRoyaumount: nec:0x7E:0xE9
+    Chamber: nec:0x7E:0xAF
+    VillageGate: nec:0x7E:0xEA
+    VillageVanguard: nec:0x7E:0xEB
+    WarehouseLoft: nec:0x7E:0xEE
+    CellarClub: nec:0x7E:0xCD
+    TheBottomLine: nec:0x7E:0xEC
+    TheRoxyTheatre: nec:0x7E:0xED
+    Arena: nec:0x7E:0xEF
+    Sports: nec:0x7E:0xF8
+    ActionGames: nec:0x7E:0xF2
+    RoleplayingGame: nec:0x7E:0xCE
+    MusicVideo: nec:0x7E:0xF3
+    RecitalOpera: nec:0x7E:0xF5
+    Pavilion: nec:0x7E:0xF6
+    Disco: nec:0x7E:0xF0
+    Standard: nec:0x7E:0xFE
+    Spectacle: nec:0x7E:0xF9
+    SciFi: nec:0x7E:0xFA
+    Adventure: nec:0x7E:0xFB
+    Drama: nec:0x7E:0xFC
+    MonoMovie: nec:0x7E:0xF7
+    Enhanced: nec:0x7E:0x9B
+    2chStereo: nec:0x7E:0xC0
+    XchStereo: nec:0x7E:0xFF
+
+  # channels:
+  #   next:
+  #   prev:
+  #   back:
+
+  # numbers:
+  #   0: nec:0x7F01:0x5A
+  #   1: nec:0x7F01:0x51
+  #   2: nec:0x7F01:0x52
+  #   3: nec:0x7F01:0x53
+  #   4: nec:0x7F01:0x54
+  #   5: nec:0x7F01:0x55
+  #   6: nec:0x7F01:0x56
+  #   7: nec:0x7F01:0x57
+  #   8: nec:0x7F01:0x58
+  #   9: nec:0x7F01:0x59
+
+  # media:
+  #   play:
+  #   pause:
+  #   play_pause:
+  #   stop:
+
+  #   next_track:
+  #   previous_track:
+
+  #   fast_forward:
+  #   rewind:
+
+  #   # clear_playlist, shuffle_set, repeat_set,
+
+  # navigate:
+  #   up:
+  #   down:
+  #   left:
+  #   right:
+
+  #   select:
+  #   back:
+
+  # custom:
