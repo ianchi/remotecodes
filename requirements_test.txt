@@ -1,0 +1,12 @@
+pylint==2.12.2
+black==22.3.0
+flake8==4.0.1
+isort==5.10.1
+mypy==0.931
+pyupgrade==2.31.0
+pre-commit
+
+types-PyYAML
+
+voluptuous>=0.12.2,<0.13
+remoteprotocols>=0.0.5

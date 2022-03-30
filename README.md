@@ -1,3 +1,3 @@
 # remotecodes
 
-`remotecodes` is a repository for IR / RF remote codes.
+`remotecodes` is a curated repository for IR / RF remote codes.
