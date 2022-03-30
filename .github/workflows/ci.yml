@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: flake8
+            name: Lint with flake8
+          - id: pylint
+            name: Lint with pylint
+          - id: black
+            name: Check formatting with black
+          - id: isort
+            name: Check import order with isort
+          - id: mypy
+            name: Check typing with mypy
+          - id: pyupgrade
+            name: Check with pyupgrade
+          - id: codes
+            name: Validate codes files
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        id: python
+        with:
+          python-version: "3.8"
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+      - name: Restore PIP cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: pip-${{ steps.python.outputs.python-version }}-${{ hashFiles('requirements_test.txt') }}
+          restore-keys: |
+            pip-${{ steps.python.outputs.python-version }}-
+      - name: Set up Python environment
+        run: |
+          pip3 install -r requirements_test.txt
+          pip3 install -e .
+
+      - name: Register problem matchers
+        run: |
+          echo "::add-matcher::.github/workflows/matchers/flake8.json"
+          echo "::add-matcher::.github/workflows/matchers/pylint.json"
+          echo "::add-matcher::.github/workflows/matchers/isort.json"
+          echo "::add-matcher::.github/workflows/matchers/mypy.json"
+          echo "::add-matcher::.github/workflows/matchers/pytest.json"
+
+      - run: flake8 remotecodes
+        if: ${{ matrix.id == 'flake8' }}
+      - run: pylint remotecodes
+        if: ${{ matrix.id == 'pylint' }}
+      - run: black --check --diff --color remotecodes
+        if: ${{ matrix.id == 'black' }}
+      - run: isort --check --diff remotecodes
+        if: ${{ matrix.id == 'isort' }}
+      - run: mypy remotecodes
+        if: ${{ matrix.id == 'mypy' }}
+      - run: pyupgrade --py38-plus remotecodes/*.py remotecodes/**/*.py
+        if: ${{ matrix.id == 'pyupgrade' }}
+      - run: python3 -m remotecodes validate remotecodes/codes
+        if: ${{ matrix.id == 'codes' }}

@@ -7,6 +7,3 @@ pyupgrade==2.31.0
 pre-commit
 
 types-PyYAML
-
-voluptuous>=0.12.2,<0.13
-remoteprotocols>=0.0.5
