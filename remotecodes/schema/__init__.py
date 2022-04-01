@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import voluptuous as vol  # type: ignore
 
-from .common import CUSTOM_SCHEMA, INFO_SCHEMA
+# flake8: noqa: F401
+from .common import CUSTOM_SCHEMA, INFO_SCHEMA, validate_source
 from .media_player import MEDIA_PLAYER_SCHEMA
 
 CODES_SCHEMA = vol.All(

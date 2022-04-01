@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import codecs
 import pathlib
+import re
 from typing import Any
 
 import voluptuous as vol  # type:ignore
 import yaml
 
-from .schema import CODES_SCHEMA
+from .schema import CODES_SCHEMA, validate_source
 
 __version__ = "0.0.1"
 
@@ -32,8 +33,7 @@ def get_codes(
 
     parts = source.split(".")
 
-    if len(parts) != 3:
-        raise SyntaxError("Source must be in the form <brand>.<type>.<number>")
+    validate_source(source)
 
     file: pathlib.Path | None
 
@@ -70,6 +70,13 @@ def validate_codes_file(file: pathlib.Path) -> dict[str, Any]:
     if folders[0] != name[0] or folders[1] != name[1]:
         raise vol.Invalid(
             f"File name ({file.name}) doesn't match folder structure ({'/'.join(folders)})"
+        )
+
+    re_path = re.compile(r"^[a-z0-9][a-z0-9_\-]*$")
+
+    if not re_path.match(folders[0]) or not re_path.match(folders[1]):
+        raise vol.Invalid(
+            f"Folder names must be only lowercases, digits or _ - but got '{'/'.join(folders)}'"
         )
 
     # Validate content

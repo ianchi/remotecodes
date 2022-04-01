@@ -1,6 +1,7 @@
 """General schema validations and helpers."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import voluptuous as vol  # type: ignore
@@ -8,6 +9,17 @@ from remoteprotocols import ProtocolRegistry
 from remoteprotocols import validators as val
 
 REGISTRY = ProtocolRegistry()
+
+
+def validate_source(value: Any) -> str:
+    """Validate a codes source reference."""
+
+    source = val.string_strict(value)
+
+    if not re.match(r"^[a-z0-9][a-z0-9_\-]*\.[a-z0-9][a-z0-9_\-]*\.[0-9]+", source):
+        raise vol.Invalid("Source must be in the form <brand>.<type>.<number>")
+
+    return source
 
 
 def validate_command(value: Any) -> str:
